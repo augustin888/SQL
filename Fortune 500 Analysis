@@ -1,0 +1,39 @@
+SELECT  healthcare_benefits, avg_employee_tenure, company_name
+FROM fortune_companies
+ where healthcare_benefits= 1
+AND avg_employee_tenure > 4.5;
+
+
+
+
+ SELECT company_name, employees, 
+  CASE 
+whEN employees <= 5000 THEN 'Small company'
+WHEN employees >= 10000 THEN 'Big company'
+END as company_size
+FROM fortune_companies
+ORDER BY company_name ASC; 
+
+
+ SELECT industry,ROUND(AVG(revenue),1)as avg_revenue
+ FROM fortune_companies
+ GROUP BY industry 
+ HAVING avg_revenue>=200;
+
+
+
+SELECT company_name, max(revenue)
+FROM fortune_companies
+WHERE industry = 'Technology';
+
+
+SELECT industry, SUM(employees) as numb_in_industry
+FROM fortune_companies
+GROUP BY industry
+ORDER BY numb_in_industry ASC;
+
+
+SELECT industry , COUNT(industry) as numb_industry,healthcare_benefits  
+FROM fortune_companies
+WHERE healthcare_benefits = 1
+GROUP BY industry;
