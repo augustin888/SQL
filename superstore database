@@ -26,11 +26,12 @@ VALUES
     (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
     (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
 
+#Electronics Category in Superstore:
 SELECT category
 from superstore 
  WHERE category = 'Electronics' ; 
 
-
+#Item Rating Categorized as Popular or Unpopular:
  SELECT item_name, average_rating,
  CASE
  WHEN average_rating < 4.5 THEN "POPULAR"
@@ -38,15 +39,17 @@ from superstore
  END AS "ITEM RATING" 
  FROM SUPERSTORE; 
 
-
+#Total Value of Items by Category:
 SELECT category, SUM(price * stock_quantity) AS total_value
 FROM superstore
 GROUP BY category;
 
+#Item Count by Category:
  SELECT category, COUNT(*) AS item_count
 FROM superstore
 GROUP BY category;
 
+#Items with Positive Stock Quantity and Above Average Rating:
  SELECT *
 FROM superstore
 WHERE stock_quantity > 0 
