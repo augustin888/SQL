@@ -56,7 +56,7 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
-
+#Companies with Healthcare Benefits and Avg Employee Tenure > 4.5:
 SELECT  healthcare_benefits, avg_employee_tenure, company_name
 FROM fortune_companies
  where healthcare_benefits= 1
@@ -64,7 +64,7 @@ AND avg_employee_tenure > 4.5;
 
 
 
-
+#Companies Categorized by Size:
  SELECT company_name, employees, 
   CASE 
 whEN employees <= 5000 THEN 'Small company'
@@ -73,25 +73,25 @@ END as company_size
 FROM fortune_companies
 ORDER BY company_name ASC; 
 
-
+#Average Revenue by Industry (>=200):
  SELECT industry,ROUND(AVG(revenue),1)as avg_revenue
  FROM fortune_companies
  GROUP BY industry 
  HAVING avg_revenue>=200;
 
 
-
+#Company with Maximum Revenue in the Technology Industry:
 SELECT company_name, max(revenue)
 FROM fortune_companies
 WHERE industry = 'Technology';
 
-
+#Total Employees in Each Industry (Sorted):
 SELECT industry, SUM(employees) as numb_in_industry
 FROM fortune_companies
 GROUP BY industry
 ORDER BY numb_in_industry ASC;
 
-
+# Number of Companies with Healthcare Benefits in Each Industry:
 SELECT industry , COUNT(industry) as numb_industry,healthcare_benefits  
 FROM fortune_companies
 WHERE healthcare_benefits = 1
