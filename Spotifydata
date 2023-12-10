@@ -18,18 +18,19 @@ tempo decimal(6,3) NOT NULL,
 duration_ms integer NOT NULL,
 time_signature integer NOT NULL )
 
-
+#Highly Popular Tracks (Popularity >= 90):
 SELECT artist_name, track_id , popularity
 FROM  Spotifydata
 where popularity >= 90
 LIMIT 10;
 
+#Longest Track in Spotifydata:
 SELECT artist_name, track_name, duration_ms 
 FROM Spotifydata 
 WHERE duration_ms = (SELECT MAX(duration_ms) FROM Spotifydata);
 
 
-
+#Olivia Rodrigo's Popular Tracks
 SELECT
     track_name as Track,
     artist_name as Artist,
@@ -39,7 +40,7 @@ WHERE artist_name LIKE '%Olivia Rodrigo%'
 GROUP BY track_name
 ORDER BY popularity desc 
 
-
+#Average Popularity, Danceability, and Energy by Artist and Track:
 SELECT artist_name as Artist,
     track_name as Track,
     avg(popularity) as Avg_Popularity,
