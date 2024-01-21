@@ -1,0 +1,63 @@
+3.4 SQL Algorithm
+-- Algorithm for Data Manipulation in SQL Server
+
+-- 3.3.1: Select all records from the database
+SELECT * FROM dbo. [Covid];
+
+
+
+-- 3.3.2: Share of people fully vaccinated
+SELECT MAX (COALESCE (people_fully_vaccinated, 0)) AS people_fully_vaccinated_result
+FROM [Covid];
+
+
+
+-- 3.3.3: Share of people partially vaccinated
+SELECT MAX (COALESCE (people_vaccinated, 0)) AS people_vaccinated_result
+FROM [Covid];
+
+
+
+-- 3.3.4: Share of people not vaccinated
+SELECT MAX (COALESCE (population - people_vaccinated, 0)) AS people_not_vaccinated_result
+FROM [Covid];
+
+
+
+-- 3.3.5: People vaccinated per hundred per location
+SELECT
+    [Country],
+    [people_vaccinated],
+    [Population],
+    ([people_vaccinated] / [Population]) * 100 AS People_vaccinated_per_hundred
+FROM
+    [Covid]
+WHERE
+    People_vaccinated_per_hundred IS NOT NULL
+ORDER BY
+    [Population] DESC;
+
+
+
+-- 3.3.6: People vaccinated per hundred over GDP per capita
+SELECT
+    [Country],
+    MAX([people_vaccinated_per_hundred]) AS MaxPeopleVaccinatedPerHundred,
+    MAX([gdp_per_capita]) AS MaxGDPPerCapita
+FROM
+    [Covid]
+GROUP BY
+    [Country];
+
+Explanation:
+1.	3.3.1: Retrieve all records from the "Covid" table.
+2.	3.3.2: Calculate the share of people fully vaccinated by selecting the maximum value of the "people_fully_vaccinated" column.
+3.	3.3.3: Calculate the share of people partially vaccinated by selecting the maximum value of the "people_vaccinated" column.
+4.	3.3.4: Calculate the share of people not vaccinated by subtracting the "people_vaccinated" from the total population.
+5.	3.3.5: Calculate the number of people vaccinated per hundred per location, excluding records with null values for "People_vaccinated_per_hundred," and order the results by population in descending order.
+6.	3.3.6: Calculate the maximum values of "People_vaccinated_per_hundred" and "gdp_per_capita" for each country, grouped by country.
+These queries serve as the foundation for obtaining key metrics, allowing for insightful analysis and visualization in Tableau.
+
+
+
+
