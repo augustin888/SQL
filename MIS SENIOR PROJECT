@@ -25,17 +25,15 @@ FROM [Covid];
 
 
 -- 3.3.5: People vaccinated per hundred per location
-SELECT
-    [Country],
-    [people_vaccinated],
-    [Population],
-    ([people_vaccinated] / [Population]) * 100 AS People_vaccinated_per_hundred
-FROM
-    [Covid]
-WHERE
-    People_vaccinated_per_hundred IS NOT NULL
-ORDER BY
-    [Population] DESC;
+  select 
+ [ Country],
+ [people_vaccinated],
+ [population],
+ ([people_vaccinated] / [population]) * 100 as people_vaccinated_per_hundred
+ from [dbo].[ Covid]
+ where people_vaccinated_per_hundred is not null and [ Country] not in ('world', 'High income', 'lower middle income', 'upper middle income', 'low income')
+ order by [population] desc;
+  
 
 
 
